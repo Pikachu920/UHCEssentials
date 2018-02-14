@@ -1,7 +1,7 @@
 package com.pikachu.uhcessentials.gui.elements;
 
 import com.pikachu.uhcessentials.Util;
-import com.pikachu.uhcessentials.gui.elements.base.MovableWindow;
+import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class ArrowCounter extends MovableWindow {

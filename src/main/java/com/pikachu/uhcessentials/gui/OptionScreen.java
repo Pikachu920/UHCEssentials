@@ -1,8 +1,8 @@
 package com.pikachu.uhcessentials.gui;
 
 import com.pikachu.uhcessentials.Main;
-import com.pikachu.uhcessentials.gui.elements.base.MovableWindow;
-import com.pikachu.uhcessentials.gui.elements.base.Window;
+import com.pikachu.uhcessentials.gui.base.MovableWindow;
+import com.pikachu.uhcessentials.gui.base.Window;
 import com.pikachu.uhcessentials.hotkeys.Hotkey;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraft.client.Minecraft;

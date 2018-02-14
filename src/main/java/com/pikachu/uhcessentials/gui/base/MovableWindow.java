@@ -1,4 +1,4 @@
-package com.pikachu.uhcessentials.gui.elements.base;
+package com.pikachu.uhcessentials.gui.base;
 
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 

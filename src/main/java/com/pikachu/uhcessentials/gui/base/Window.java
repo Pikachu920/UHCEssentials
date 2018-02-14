@@ -1,4 +1,4 @@
-package com.pikachu.uhcessentials.gui.elements.base;
+package com.pikachu.uhcessentials.gui.base;
 
 import com.pikachu.uhcessentials.Main;
 import com.pikachu.uhcessentials.gui.OptionScreen;
