@@ -37,6 +37,10 @@ public class OptionScreen extends GuiScreen {
     }
 
     public boolean hovering(Window window, int x, int y) {
+        System.out.println("Window x: " + window.getX());
+        System.out.println("mouse x: " + x);
+        System.out.println("mouse x - window x: " + (x - window.getX()));
+        System.out.println("Window width: " + window.getWidth());
         return Math.abs(y - window.getY()) <= window.getHeight() &&
                 (x - window.getX()) <= window.getWidth();
     }

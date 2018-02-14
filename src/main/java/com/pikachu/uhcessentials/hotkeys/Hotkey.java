@@ -6,7 +6,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 public abstract class Hotkey {
 
     public KeyBinding binding = getKeyBinding();
-    public Object owner;
+    private Object owner;
 
     public Hotkey(Object owner) {
         this.owner = owner;
@@ -16,4 +16,9 @@ public abstract class Hotkey {
     public abstract void onPress();
 
     public abstract KeyBinding getKeyBinding();
+
+    public Object getOwner() {
+        return owner;
+    }
+
 }
