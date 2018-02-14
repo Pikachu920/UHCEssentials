@@ -1,0 +1,16 @@
+[
+{
+  "modid": "uhcessentials",
+  "name": "UHC Essentials",
+  "description": "A remake of the original UHC essentials mod for Forge.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["sky_high"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
