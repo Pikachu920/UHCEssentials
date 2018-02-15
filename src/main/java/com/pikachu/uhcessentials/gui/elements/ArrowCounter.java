@@ -2,9 +2,14 @@ package com.pikachu.uhcessentials.gui.elements;
 
 import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class ArrowCounter extends MovableWindow {
+
+    private ItemStack arrow = new ItemStack(Items.arrow, 1);
+    private String amount;
 
     public ArrowCounter() {
         super();
@@ -12,12 +17,12 @@ public class ArrowCounter extends MovableWindow {
 
     @Override
     public int getHeight() {
-        return 6;
+        return 15;
     }
 
     @Override
     public int getWidth() {
-        return 6;
+        return 15;
     }
 
     @Override
@@ -36,7 +41,8 @@ public class ArrowCounter extends MovableWindow {
     }
 
     public void render(RenderGameOverlayEvent.Text event) {
-        //Util.renderItemTexture(getX(), getY(), 262, 16, 16);
-        fontRenderer.drawStringWithShadow("" + Util.amountOfItemIn(262, mc.thePlayer.inventory.mainInventory), getX(), getY(), 0xfffff);
+        amount = String.valueOf(Util.amountOfItemIn(262, mc.thePlayer.inventory.mainInventory));
+        Util.drawItemStack(arrow, getX(), getY(), "");
+        fontRenderer.drawStringWithShadow(amount, getX() + (amount.length() == 1 ? 12 : 9), getY() + 8, (Integer.valueOf(amount) <= 10 ? 0xffff0000 :0xffffffff));
     }
 }

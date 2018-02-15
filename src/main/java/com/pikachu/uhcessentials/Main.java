@@ -2,11 +2,10 @@ package com.pikachu.uhcessentials;
 
 import com.pikachu.uhcessentials.gui.OptionScreen;
 import com.pikachu.uhcessentials.gui.elements.ArrowCounter;
-import com.pikachu.uhcessentials.gui.elements.Coordinates;
+import com.pikachu.uhcessentials.gui.elements.FPS;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -36,7 +35,7 @@ public class Main {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new Coordinates());
+        MinecraftForge.EVENT_BUS.register(new FPS());
         MinecraftForge.EVENT_BUS.register(new HotkeyStore());
         MinecraftForge.EVENT_BUS.register(new ArrowCounter());
     }

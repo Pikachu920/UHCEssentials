@@ -8,6 +8,8 @@ import net.minecraft.client.gui.Gui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.lang.reflect.Field;
+
 public abstract class Window extends Gui {
 
     public Window() {
@@ -25,6 +27,7 @@ public abstract class Window extends Gui {
 
     protected Minecraft mc = Minecraft.getMinecraft();
     private boolean clicked;
+    private Field textColor;
     protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 
     public int getX() {
@@ -39,6 +42,7 @@ public abstract class Window extends Gui {
         if (x < mc.displayWidth) {
             this.x = x;
         }
+        //fontRenderer.
     }
 
     public void setY(int y) {

@@ -4,20 +4,22 @@ import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
-public class Coordinates extends MovableWindow {
+public class FPS extends MovableWindow {
 
-    public Coordinates() {
+    private String fps;
+
+    public FPS() {
         super();
     }
 
     @Override
     public int getHeight() {
-        return 6;
+        return Util.heightOf(fps.toCharArray());
     }
 
     @Override
     public int getWidth() {
-        return 13;
+        return Util.widthOf(fps.toCharArray());
     }
 
     @Override
@@ -32,11 +34,12 @@ public class Coordinates extends MovableWindow {
 
     @Override
     public String getName() {
-        return "coordinates";
+        return "FPS";
     }
 
     public void render(RenderGameOverlayEvent.Text event) {
-        fontRenderer.drawStringWithShadow("" + Util.getFPS(), getX(), getY(), 0xfffff);
+        fps = Util.getFPS();
+        fontRenderer.drawStringWithShadow(fps, getX(), getY(), 0xfffff);
     }
 
 }
