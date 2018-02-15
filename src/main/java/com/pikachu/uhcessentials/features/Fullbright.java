@@ -5,6 +5,9 @@ import com.pikachu.uhcessentials.hotkeys.Hotkey;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.lwjgl.input.Keyboard;
 
 public class Fullbright {
@@ -12,9 +15,13 @@ public class Fullbright {
     private boolean enabled = Main.getConfig().getBoolean("enabled", "Fullbright", false,
             "Controls whether or not fullbright is enabled");
     private Minecraft mc = Minecraft.getMinecraft();
+    private final float FULLBRIGHT_LEVEL = 2000;
     private float originalGamma = mc.gameSettings.gammaSetting;
 
     public Fullbright() {
+        // to prevent from saving fullbright as the brightness setting
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> mc.gameSettings.gammaSetting = originalGamma));
+        MinecraftForge.EVENT_BUS.register(this);
         setEnabled(enabled);
         HotkeyStore.add(new Hotkey(this) {
             @Override
@@ -39,7 +46,7 @@ public class Fullbright {
     public void setEnabled(boolean enabled) {
         if (enabled) {
             originalGamma = mc.gameSettings.gammaSetting;
-            mc.gameSettings.gammaSetting = Float.MAX_VALUE;
+            mc.gameSettings.gammaSetting = FULLBRIGHT_LEVEL;
         } else {
             mc.gameSettings.gammaSetting = originalGamma;
         }
@@ -50,4 +57,11 @@ public class Fullbright {
         setEnabled(!isEnabled());
     }
 
+    // without this fullbright won't properly persist restarts
+    @SubscribeEvent
+    public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+        if (enabled) {
+            mc.gameSettings.gammaSetting = FULLBRIGHT_LEVEL;
+        }
+    }
 }
