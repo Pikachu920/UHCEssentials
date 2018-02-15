@@ -31,7 +31,7 @@ public class OptionScreen extends GuiScreen {
 
             @Override
             public KeyBinding getKeyBinding() {
-                return new KeyBinding("Open options screen", Keyboard.KEY_L, "UHC Essentials");
+                return new KeyBinding("Open options screen", Keyboard.KEY_M, "UHC Essentials");
             }
         });
     }

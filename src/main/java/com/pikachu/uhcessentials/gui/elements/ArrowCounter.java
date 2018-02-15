@@ -43,6 +43,6 @@ public class ArrowCounter extends MovableWindow {
     public void render(RenderGameOverlayEvent.Text event) {
         amount = String.valueOf(Util.amountOfItemIn(262, mc.thePlayer.inventory.mainInventory));
         Util.drawItemStack(arrow, getX(), getY(), "");
-        fontRenderer.drawStringWithShadow(amount, getX() + (amount.length() == 1 ? 12 : 9), getY() + 8, (Integer.valueOf(amount) <= 10 ? 0xffff0000 :0xffffffff));
+        fontRenderer.drawStringWithShadow(amount, getX() + (amount.length() == 1 ? 12 : 9), getY() + 8, (Integer.valueOf(amount) <= 10 ? 0xff5555 : 0xffffffff));
     }
 }

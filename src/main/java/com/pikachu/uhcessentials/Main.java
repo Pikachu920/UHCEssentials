@@ -1,5 +1,6 @@
 package com.pikachu.uhcessentials;
 
+import com.pikachu.uhcessentials.features.Fullbright;
 import com.pikachu.uhcessentials.gui.OptionScreen;
 import com.pikachu.uhcessentials.gui.elements.ArrowCounter;
 import com.pikachu.uhcessentials.gui.elements.FPS;
@@ -28,7 +29,11 @@ public class Main {
     }
 
     private static final OptionScreen OPTION_SCREEN = new OptionScreen();
+    private static final Fullbright FULLBRIGHT = new Fullbright();
 
+    public static Fullbright getFullbright() {
+        return FULLBRIGHT;
+    }
     public static OptionScreen getOptionScreen() {
         return OPTION_SCREEN;
     }
