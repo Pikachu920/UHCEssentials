@@ -17,7 +17,7 @@ public class ArrowCounter extends MovableWindow {
 
     @Override
     public int getWidth() {
-        return 13;
+        return 6;
     }
 
     @Override

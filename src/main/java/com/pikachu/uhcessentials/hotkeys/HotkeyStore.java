@@ -16,7 +16,7 @@ public class HotkeyStore {
     }
 
     public static void add(Hotkey hotkey) {
-        //hotkeys.add(hotkey);
+        hotkeys.add(hotkey);
     }
 
     public static Hotkey get(Object owner) {

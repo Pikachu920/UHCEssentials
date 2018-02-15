@@ -37,12 +37,9 @@ public class OptionScreen extends GuiScreen {
     }
 
     public boolean hovering(Window window, int x, int y) {
-        System.out.println("Window x: " + window.getX());
-        System.out.println("mouse x: " + x);
-        System.out.println("mouse x - window x: " + (x - window.getX()));
-        System.out.println("Window width: " + window.getWidth());
-        return Math.abs(y - window.getY()) <= window.getHeight() &&
-                (x - window.getX()) <= window.getWidth();
+        // harvard offered me a full ride after i wrote this
+        return (y >= window.getY() && y <= (window.getY() + window.getHeight())) &&
+                ((window.getX() + window.getWidth() >= x) && x >= window.getX());
     }
 
     @Override
@@ -78,7 +75,6 @@ public class OptionScreen extends GuiScreen {
     @Override
     public void keyTyped(char typedChar, int keyCode) throws IOException {
         if (keyCode == HotkeyStore.get(this).binding.getKeyCode()) {
-            windows.forEach(w -> w.setClicked(false));
             mc.displayGuiScreen(null);
             if (mc.currentScreen == null) {
                 mc.setIngameFocus();
@@ -99,6 +95,11 @@ public class OptionScreen extends GuiScreen {
         }
         lastX = mouseX;
         lastY = mouseY;
+    }
+
+    @Override
+    public void onGuiClosed() {
+        windows.forEach(w -> w.setClicked(false));
     }
 
 }
