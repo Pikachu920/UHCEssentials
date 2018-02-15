@@ -42,7 +42,6 @@ public abstract class Window extends Gui {
         if (x < mc.displayWidth) {
             this.x = x;
         }
-        //fontRenderer.
     }
 
     public void setY(int y) {
