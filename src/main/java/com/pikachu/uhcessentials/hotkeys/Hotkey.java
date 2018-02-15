@@ -10,7 +10,7 @@ public abstract class Hotkey {
 
     public Hotkey(Object owner) {
         this.owner = owner;
-        HotkeyStore.getHotkeys().add(this);
+        ClientRegistry.registerKeyBinding(binding);
     }
 
     public abstract void onPress();

@@ -78,9 +78,7 @@ public class OptionScreen extends GuiScreen {
     @Override
     public void keyTyped(char typedChar, int keyCode) throws IOException {
         if (keyCode == HotkeyStore.get(this).binding.getKeyCode()) {
-            for (Window window : windows) {
-                window.setClicked(false);
-            }
+            windows.forEach(w -> w.setClicked(false));
             mc.displayGuiScreen(null);
             if (mc.currentScreen == null) {
                 mc.setIngameFocus();

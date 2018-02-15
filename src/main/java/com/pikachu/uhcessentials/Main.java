@@ -6,6 +6,7 @@ import com.pikachu.uhcessentials.gui.elements.Coordinates;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -23,7 +24,6 @@ public class Main {
     private static Configuration config = new Configuration(new File(Util.getWorkingDir(true) + "UHCEssentials.cfg"));
 
     private static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-
     public static Logger getLogger() {
         return LOGGER;
     }
