@@ -90,7 +90,7 @@ public abstract class Window extends Gui {
 
     @SubscribeEvent
     public void onTextRender(RenderGameOverlayEvent.Text event) {
-        if (((isEnabled() || drawWhenDisabled()) || mc.currentScreen instanceof OptionScreen) && (drawWhenDisabled() || !mc.gameSettings.showDebugInfo)) {
+        if (((isEnabled() || drawWhenDisabled()) || mc.currentScreen instanceof OptionScreen) && (drawWhenDebug() || !mc.gameSettings.showDebugInfo)) {
             render(event);
             if (!isEnabled() && displayDisabledIndicator()) {
                 drawDisabledIndicator();
