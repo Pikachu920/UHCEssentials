@@ -1,6 +1,7 @@
 package com.pikachu.uhcessentials.gui;
 
 import com.pikachu.uhcessentials.Main;
+import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import com.pikachu.uhcessentials.gui.base.Window;
 import com.pikachu.uhcessentials.hotkeys.Hotkey;
@@ -17,16 +18,16 @@ public class OptionScreen extends GuiScreen {
 
     public static ArrayList<Window> windows = new ArrayList<Window>();
 
-    private OptionScreen optionScreen = this;
+    private static final OptionScreen OPTION_SCREEN = new OptionScreen();
     private int lastX;
     private int lastY;
     private int lastButton;
 
-    public OptionScreen() {
+    private OptionScreen() {
         HotkeyStore.add(new Hotkey(this) {
             @Override
             public void onPress() {
-                Minecraft.getMinecraft().displayGuiScreen(optionScreen);
+                Minecraft.getMinecraft().displayGuiScreen(getInstance());
             }
 
             @Override
@@ -42,19 +43,8 @@ public class OptionScreen extends GuiScreen {
                 ((window.getX() + window.getWidth() >= x) && x >= window.getX());
     }
 
-    @Override
-    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        System.out.println("x: " + mouseX);
-        System.out.println("y: " + mouseY);
-        lastX = mouseX;
-        lastY = mouseY;
-        lastButton = mouseButton;
-        for (Window window : windows) {
-            if (hovering(window, mouseX, mouseY)) {
-                window.setClicked(true);
-                return;
-            }
-        }
+    public static OptionScreen getInstance() {
+        return OPTION_SCREEN;
     }
 
     @Override
@@ -102,6 +92,21 @@ public class OptionScreen extends GuiScreen {
     @Override
     public void onGuiClosed() {
         windows.forEach(w -> w.setClicked(false));
+    }
+
+    @Override
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        System.out.println("x: " + mouseX);
+        System.out.println("y: " + mouseY);
+        lastX = mouseX;
+        lastY = mouseY;
+        lastButton = mouseButton;
+        for (Window window : Util.reverse(windows)) { // the reversal ensures that top windows are prioritized
+            if (hovering(window, mouseX, mouseY)) {
+                window.setClicked(true);
+                return;
+            }
+        }
     }
 
 }

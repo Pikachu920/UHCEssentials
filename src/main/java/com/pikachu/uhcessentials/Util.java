@@ -5,9 +5,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 import java.awt.Color;
 import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class Util {
 
@@ -24,18 +29,6 @@ public final class Util {
         return mc.debug.split(" fps")[0];
     }
 
-    public static int widthOf(char... chars) {
-        int length = 0;
-        for (int i = 0; i < chars.length; i++) {
-            length += mc.fontRendererObj.getCharWidth(chars[i]);
-        }
-        return length;
-    }
-
-    // basically a placeholder in case I/mojang want to do something with height in the future
-    public static int heightOf(char... chars) {
-        return mc.fontRendererObj.FONT_HEIGHT;
-    }
 
     public static String getWorkingDir(boolean includeSeperator) {
         return includeSeperator ? workingDir + File.separator : workingDir;
@@ -60,6 +53,21 @@ public final class Util {
         if (stack != null) font = stack.getItem().getFontRenderer(stack);
         if (font == null) font = mc.fontRendererObj;
         itemRender.renderItemIntoGUI(stack, x, y);
+    }
+
+    public static String getBiomeAt(BlockPos pos, World world) {
+        if (world != null && pos != null) {
+            return world.getWorldChunkManager().getBiomeGenerator(pos).biomeName;
+        }
+        return null;
+    }
+
+    public static <T> List<T> reverse(final List<T> list) {
+        final int last = list.size() - 1;
+        return IntStream.rangeClosed(0, last)
+                .map(i -> (last - i))
+                .mapToObj(list::get)
+                .collect(Collectors.toList());
     }
 
 }

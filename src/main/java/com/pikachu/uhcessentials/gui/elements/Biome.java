@@ -2,15 +2,17 @@ package com.pikachu.uhcessentials.gui.elements;
 
 import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
-public class FPS extends MovableWindow {
+public class Biome extends MovableWindow {
 
     private final int PADDING = 1;
-    private String fps;
+    private String biome;
 
-    public FPS() {
+    public Biome() {
         super();
     }
 
@@ -21,7 +23,7 @@ public class FPS extends MovableWindow {
 
     @Override
     public int getWidth() {
-        return fontRenderer.getStringWidth(fps);
+        return fontRenderer.getStringWidth(biome);
     }
 
     @Override
@@ -36,13 +38,14 @@ public class FPS extends MovableWindow {
 
     @Override
     public String getName() {
-        return "FPS";
+        return "biome";
     }
 
     public void render(RenderGameOverlayEvent.Text event) {
-        fps = Util.getFPS() + " FPS";
+        EntityPlayerSP player = mc.thePlayer;
+        biome = Util.getBiomeAt(new BlockPos(player.posX, player.posY, player.posZ), mc.theWorld);
         Gui.drawRect(getX() - PADDING, getY(), getX() + getWidth() + PADDING, getY() + getHeight(), getColor());
-        fontRenderer.drawStringWithShadow(fps, getX(), getY(), Util.WHITE);
+        fontRenderer.drawStringWithShadow(biome, getX(), getY(), Util.WHITE);
     }
 
 }

@@ -1,8 +1,7 @@
 package com.pikachu.uhcessentials;
 
-import com.pikachu.uhcessentials.features.Fullbright;
-import com.pikachu.uhcessentials.gui.OptionScreen;
 import com.pikachu.uhcessentials.gui.elements.ArrowCounter;
+import com.pikachu.uhcessentials.gui.elements.Biome;
 import com.pikachu.uhcessentials.gui.elements.FPS;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,21 +27,12 @@ public class Main {
         return LOGGER;
     }
 
-    private static final OptionScreen OPTION_SCREEN = new OptionScreen();
-    private static final Fullbright FULLBRIGHT = new Fullbright();
-
-    public static Fullbright getFullbright() {
-        return FULLBRIGHT;
-    }
-    public static OptionScreen getOptionScreen() {
-        return OPTION_SCREEN;
-    }
-
     @EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new FPS());
         MinecraftForge.EVENT_BUS.register(new HotkeyStore());
         MinecraftForge.EVENT_BUS.register(new ArrowCounter());
+        MinecraftForge.EVENT_BUS.register(new Biome());
     }
 
     public static Configuration getConfig() {
