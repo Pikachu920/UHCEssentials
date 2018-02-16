@@ -2,25 +2,19 @@ package com.pikachu.uhcessentials;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.awt.Color;
 import java.io.File;
-import java.lang.reflect.Field;
 
 public final class Util {
 
-    // to prevent instantiation
     private Util() {
     }
+
+    public static final int WHITE = new Color(255, 255, 255).getRGB();
 
     private static String workingDir = new File("").getAbsolutePath();
 

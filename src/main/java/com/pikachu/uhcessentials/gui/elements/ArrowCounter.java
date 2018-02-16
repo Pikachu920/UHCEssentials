@@ -6,9 +6,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
+import java.awt.Color;
+
 public class ArrowCounter extends MovableWindow {
 
     private ItemStack arrow = new ItemStack(Items.arrow, 1);
+    private final int RED = new Color(255, 85, 85).getRGB();
     private String amount;
 
     public ArrowCounter() {
@@ -43,7 +46,8 @@ public class ArrowCounter extends MovableWindow {
     public void render(RenderGameOverlayEvent.Text event) {
         amount = String.valueOf(Util.amountOfItemIn(262, mc.thePlayer.inventory.mainInventory));
         Util.drawItemStack(arrow, getX(), getY(), "");
-        fontRenderer.drawStringWithShadow(amount, getX() + (amount.length() == 1 ? 12 : 9), getY() + 8, (Integer.valueOf(amount) <= 10 ? 0xff5555 : 0xffffffff));
+        fontRenderer.drawStringWithShadow(amount, getX() + (amount.length() == 1 ? 12 : 9), getY() + 8,
+                (Integer.valueOf(amount) <= 10 ? RED : Util.WHITE));
     }
 
 }

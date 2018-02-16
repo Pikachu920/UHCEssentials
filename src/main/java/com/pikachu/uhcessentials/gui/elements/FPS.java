@@ -2,10 +2,12 @@ package com.pikachu.uhcessentials.gui.elements;
 
 import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
+import net.minecraft.client.gui.Gui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class FPS extends MovableWindow {
 
+    private final int PADDING = 1;
     private String fps;
 
     public FPS() {
@@ -38,8 +40,9 @@ public class FPS extends MovableWindow {
     }
 
     public void render(RenderGameOverlayEvent.Text event) {
-        fps = Util.getFPS();
-        fontRenderer.drawStringWithShadow(fps, getX(), getY(), 0xfffff);
+        fps = Util.getFPS() + " FPS";
+        Gui.drawRect(getX() - PADDING, getY(), getX() + getWidth() + PADDING, getY() + getHeight(), getColor());
+        fontRenderer.drawStringWithShadow(fps, getX(), getY(), Util.WHITE);
     }
 
 }

@@ -8,6 +8,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.awt.Color;
 import java.lang.reflect.Field;
 
 public abstract class Window extends Gui {
@@ -15,6 +16,8 @@ public abstract class Window extends Gui {
     public Window() {
         OptionScreen.windows.add(this);
     }
+
+    private Color color = new Color(69, 69, 69, 150);
 
     private int x = Main.getConfig().getInt("x", getName(), getDefaultX(), Integer.MIN_VALUE, Integer.MAX_VALUE,
             "Controls the x coordinate of the " + getName() + " window");
@@ -36,6 +39,10 @@ public abstract class Window extends Gui {
 
     public int getY() {
         return y;
+    }
+
+    public int getColor() {
+        return color.getRGB();
     }
 
     public void setX(int x) {
