@@ -12,15 +12,13 @@ import org.lwjgl.input.Keyboard;
 
 public class Fullbright {
 
-    private static final Fullbright FULLBRIGHT = new Fullbright();
-
     private boolean enabled = Main.getConfig().getBoolean("enabled", "Fullbright", false,
             "Controls whether or not fullbright is enabled");
     private Minecraft mc = Minecraft.getMinecraft();
     private final float FULLBRIGHT_LEVEL = 2000;
     private float originalGamma = mc.gameSettings.gammaSetting;
 
-    private Fullbright() {
+    public Fullbright() {
         // to prevent from saving fullbright as the brightness setting
         Runtime.getRuntime().addShutdownHook(new Thread(() -> mc.gameSettings.gammaSetting = originalGamma));
         MinecraftForge.EVENT_BUS.register(this);
@@ -65,10 +63,6 @@ public class Fullbright {
         if (enabled) {
             mc.gameSettings.gammaSetting = FULLBRIGHT_LEVEL;
         }
-    }
-
-    public static Fullbright getInstance() {
-        return FULLBRIGHT;
     }
 
 }

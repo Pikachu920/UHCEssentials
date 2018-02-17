@@ -18,16 +18,16 @@ public class OptionScreen extends GuiScreen {
 
     public static ArrayList<Window> windows = new ArrayList<Window>();
 
-    private static final OptionScreen OPTION_SCREEN = new OptionScreen();
     private int lastX;
     private int lastY;
     private int lastButton;
 
-    private OptionScreen() {
+    public OptionScreen() {
         HotkeyStore.add(new Hotkey(this) {
             @Override
             public void onPress() {
-                Minecraft.getMinecraft().displayGuiScreen(getInstance());
+                Minecraft.getMinecraft().displayGuiScreen(Main.getOptionScreen());
+                System.out.println("debug: " + mc.debug);
             }
 
             @Override
@@ -41,10 +41,6 @@ public class OptionScreen extends GuiScreen {
         // harvard offered me a full ride after i wrote this
         return (y >= window.getY() && y <= (window.getY() + window.getHeight())) &&
                 ((window.getX() + window.getWidth() >= x) && x >= window.getX());
-    }
-
-    public static OptionScreen getInstance() {
-        return OPTION_SCREEN;
     }
 
     @Override

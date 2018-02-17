@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import java.awt.Color;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,6 +23,7 @@ public final class Util {
     public static final int WHITE = new Color(255, 255, 255).getRGB();
 
     private static String workingDir = new File("").getAbsolutePath();
+    private static final DecimalFormat TRIM_FORMAT = new DecimalFormat("0");
 
     private static Minecraft mc =  Minecraft.getMinecraft();
 
@@ -68,6 +70,24 @@ public final class Util {
                 .map(i -> (last - i))
                 .mapToObj(list::get)
                 .collect(Collectors.toList());
+    }
+
+    public static String findLongestString(String... strings) {
+        String longestString = strings[0];
+        for (String string : strings) {
+            if (string.length() > longestString.length()) {
+                longestString = string;
+            }
+        }
+        return longestString;
+    }
+
+    public static String trimmed(Double d) {
+        return TRIM_FORMAT.format(d);
+    }
+
+    public static String getRenderedEntityCount() {
+        return mc.renderGlobal.getDebugInfoEntities().split("/")[0].split(" ")[1];
     }
 
 }

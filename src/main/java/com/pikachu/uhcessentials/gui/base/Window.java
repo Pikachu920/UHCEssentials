@@ -9,7 +9,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.Color;
-import java.lang.reflect.Field;
 
 public abstract class Window extends Gui {
 
@@ -17,6 +16,7 @@ public abstract class Window extends Gui {
         OptionScreen.windows.add(this);
     }
 
+    private final int DISABLED_COLOR = new Color(255, 0, 25).getRGB();
     private Color color = new Color(69, 69, 69, 150);
 
     private int x = Main.getConfig().getInt("x", getName(), getDefaultX(), Integer.MIN_VALUE, Integer.MAX_VALUE,
@@ -30,7 +30,6 @@ public abstract class Window extends Gui {
 
     protected Minecraft mc = Minecraft.getMinecraft();
     private boolean clicked;
-    private Field textColor;
     protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 
     public int getX() {
@@ -105,7 +104,7 @@ public abstract class Window extends Gui {
     }
 
     public void drawDisabledIndicator() {
-        fontRenderer.drawStringWithShadow("X", getX() - (getWidth() / 2), getY() - (getHeight() / 2), 0xffffff);
+        fontRenderer.drawStringWithShadow("X", getX() - 2, getY() - 4, DISABLED_COLOR);
     }
 
     public abstract int getDefaultX();

@@ -11,7 +11,7 @@ import java.awt.Color;
 public class ArrowCounter extends MovableWindow {
 
     private ItemStack arrow = new ItemStack(Items.arrow, 1);
-    private final int RED = new Color(255, 85, 85).getRGB();
+    private final int LOW_INDICATOR = new Color(255, 85, 85).getRGB();
     private String amount;
 
     public ArrowCounter() {
@@ -47,7 +47,7 @@ public class ArrowCounter extends MovableWindow {
         amount = String.valueOf(Util.amountOfItemIn(262, mc.thePlayer.inventory.mainInventory));
         Util.drawItemStack(arrow, getX(), getY(), "");
         fontRenderer.drawStringWithShadow(amount, getX() + (amount.length() == 1 ? 12 : 9), getY() + 8,
-                (Integer.valueOf(amount) <= 10 ? RED : Util.WHITE));
+                (Integer.valueOf(amount) <= 10 ? LOW_INDICATOR : Util.WHITE));
     }
 
 }
