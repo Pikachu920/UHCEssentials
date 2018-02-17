@@ -4,7 +4,6 @@ import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class Biome extends MovableWindow {
@@ -43,7 +42,7 @@ public class Biome extends MovableWindow {
 
     public void render(RenderGameOverlayEvent.Text event) {
         EntityPlayerSP player = mc.thePlayer;
-        biome = Util.getBiomeAt(new BlockPos(player.posX, player.posY, player.posZ), mc.theWorld);
+        biome = Util.getBiomeAt(player.posX, player.posZ);
         Gui.drawRect(getX() - PADDING, getY(), getX() + getWidth() + PADDING, getY() + getHeight(), getColor());
         fontRenderer.drawStringWithShadow(biome, getX(), getY(), Util.WHITE);
     }

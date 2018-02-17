@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.util.MathHelper;
 
 import java.awt.Color;
 import java.io.File;
@@ -57,11 +57,9 @@ public final class Util {
         itemRender.renderItemIntoGUI(stack, x, y);
     }
 
-    public static String getBiomeAt(BlockPos pos, World world) {
-        if (world != null && pos != null) {
-            return world.getWorldChunkManager().getBiomeGenerator(pos).biomeName;
-        }
-        return null;
+    public static String getBiomeAt(double x, double z) {
+        return mc.theWorld.getBiomeGenForCoords(new BlockPos(MathHelper.floor_double(mc.thePlayer.posX), 64,
+                MathHelper.floor_double(mc.thePlayer.posZ))).biomeName;
     }
 
     public static <T> List<T> reverse(final List<T> list) {
