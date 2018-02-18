@@ -12,25 +12,39 @@ import java.awt.Color;
 
 public abstract class Window extends Gui {
 
-    public Window() {
-        OptionScreen.windows.add(this);
-    }
+    private String name;
+    private int defaultX;
+    private int defaultY;
+    private int x;
 
     private final int DISABLED_COLOR = new Color(255, 0, 25).getRGB();
     private Color color = new Color(69, 69, 69, 150);
+    private int y;
+    private boolean enabled;
 
-    private int x = Main.getConfig().getInt("x", getName(), getDefaultX(), Integer.MIN_VALUE, Integer.MAX_VALUE,
-            "Controls the x coordinate of the " + getName() + " window");
-
-    private int y = Main.getConfig().getInt("y", getName(), getDefaultY(), Integer.MIN_VALUE, Integer.MAX_VALUE,
-            "Controls the x coordinate of the " + getName() + " window");
-
-    private boolean enabled = Main.getConfig().getBoolean("enabled", getName(), true,
-            "Controls whether or not the " + getName() + " window is shown");
+    public Window(String name, int defaultX, int defaultY) {
+        this.name = name;
+        this.defaultX = defaultX;
+        this.defaultY = defaultY;
+        OptionScreen.windows.add(this);
+        x = Main.getConfig().getInt("x", name, defaultX, Integer.MIN_VALUE, Integer.MAX_VALUE,
+                "Controls the x coordinate of the " + name + " window");
+        y = Main.getConfig().getInt("y", name, defaultY, Integer.MIN_VALUE, Integer.MAX_VALUE,
+                "Controls the x coordinate of the " + name + " window");
+        enabled = Main.getConfig().getBoolean("enabled", name, true,
+                "Controls whether or not the " + name + " window is shown");
+        if (x > mc.displayWidth) {
+            x = mc.displayWidth / 2;
+        }
+        if (y > mc.displayHeight) {
+            y = mc.displayHeight / 2;
+        }
+    }
 
     protected Minecraft mc = Minecraft.getMinecraft();
     private boolean clicked;
     protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
+
 
     public int getX() {
         return x;
@@ -57,8 +71,16 @@ public abstract class Window extends Gui {
     }
 
     public void reset() {
-        setX(getDefaultX());
-        setY(getDefaultY());
+        setX(defaultX);
+        setY(defaultY);
+    }
+
+    public int getDefaultY() {
+        return defaultY;
+    }
+
+    public int getDefaultX() {
+        return defaultX;
     }
 
     public boolean isEnabled() {
@@ -93,9 +115,13 @@ public abstract class Window extends Gui {
         return false;
     }
 
+    public boolean shouldRender() {
+        return ((isEnabled() || drawWhenDisabled()) || mc.currentScreen instanceof OptionScreen) && (drawWhenDebug() || !mc.gameSettings.showDebugInfo);
+    }
+
     @SubscribeEvent
     public void onTextRender(RenderGameOverlayEvent.Text event) {
-        if (((isEnabled() || drawWhenDisabled()) || mc.currentScreen instanceof OptionScreen) && (drawWhenDebug() || !mc.gameSettings.showDebugInfo)) {
+        if (shouldRender()) {
             render(event);
             if (!isEnabled() && displayDisabledIndicator()) {
                 drawDisabledIndicator();
@@ -107,16 +133,15 @@ public abstract class Window extends Gui {
         fontRenderer.drawStringWithShadow("X", getX() - 2, getY() - 4, DISABLED_COLOR);
     }
 
-    public abstract int getDefaultX();
-
-    public abstract int getDefaultY();
+    public String getName() {
+        return this.name;
+    }
 
     public abstract int getHeight();
 
     public abstract int getWidth();
 
-    public abstract String getName();
-
     public abstract void render(RenderGameOverlayEvent.Text event);
+
 
 }

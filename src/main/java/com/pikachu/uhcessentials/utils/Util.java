@@ -1,7 +1,8 @@
-package com.pikachu.uhcessentials;
+package com.pikachu.uhcessentials.utils;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,15 +47,18 @@ public final class Util {
         return amount;
     }
 
-    public static void drawItemStack(ItemStack stack, int x, int y, String altText)
-    {
+    public static void drawItemStack(ItemStack stack, int x, int y, boolean overlay, String altText) {
+        RenderHelper.enableGUIStandardItemLighting();
         RenderItem itemRender = mc.getRenderItem();
-        GlStateManager.translate(0.0F, 0.0F, 32.0F);
-        itemRender.zLevel = -200F;
-        net.minecraft.client.gui.FontRenderer font = null;
-        if (stack != null) font = stack.getItem().getFontRenderer(stack);
-        if (font == null) font = mc.fontRendererObj;
-        itemRender.renderItemIntoGUI(stack, x, y);
+        FontRenderer font = mc.fontRendererObj;
+        itemRender.renderItemAndEffectIntoGUI(stack, x, y);
+        if (overlay) {
+            itemRender.renderItemOverlayIntoGUI(font, stack, x, y, altText);
+        }
+    }
+
+    public static void drawItemStack(ItemStack stack, int x, int y, boolean drawOverlay) {
+        drawItemStack(stack, x, y, drawOverlay, null);
     }
 
     public static String getBiomeAt(double x, double z) {

@@ -1,7 +1,7 @@
 package com.pikachu.uhcessentials.gui.elements;
 
-import com.pikachu.uhcessentials.Util;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
+import com.pikachu.uhcessentials.utils.Util;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.MathHelper;
@@ -14,7 +14,7 @@ public class Coordinates extends MovableWindow {
     private String longestString;
 
     public Coordinates() {
-        super();
+        super("coordinates", 110, 110);
     }
 
     @Override
@@ -25,21 +25,6 @@ public class Coordinates extends MovableWindow {
     @Override
     public int getWidth() {
         return fontRenderer.getStringWidth(longestString) + RIGHT_PADDING;
-    }
-
-    @Override
-    public int getDefaultX() {
-        return 110;
-    }
-
-    @Override
-    public int getDefaultY() {
-        return 110;
-    }
-
-    @Override
-    public String getName() {
-        return "coordinates";
     }
 
     public void render(RenderGameOverlayEvent.Text event) {
@@ -59,7 +44,7 @@ public class Coordinates extends MovableWindow {
             headingZ = "+";
         } else if (rotation > 22.5 && rotation <= 22.5 * 3) {
             direction = "SW";
-            headingX = "+";
+            headingZ = "+";
             headingX = "-";
         } else if (rotation > 22.5 * 3 && rotation <= 22.5 * 5) {
             direction = "W";
