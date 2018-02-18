@@ -55,6 +55,7 @@ public final class Util {
         if (overlay) {
             itemRender.renderItemOverlayIntoGUI(font, stack, x, y, altText);
         }
+        RenderHelper.disableStandardItemLighting();
     }
 
     public static void drawItemStack(ItemStack stack, int x, int y, boolean drawOverlay) {

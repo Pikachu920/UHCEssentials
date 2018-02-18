@@ -53,7 +53,7 @@ public class ItemWindow extends MovableWindow {
     public void render(RenderGameOverlayEvent.Text event) {
         if (getItem() != null) {
             Util.drawItemStack(getItem(), getX(), getY(), true, "");
-        } else if (mc.currentScreen instanceof OptionScreen) {
+        } else if (mc.currentScreen instanceof OptionScreen && getDefaultItem() != null) {
             Util.drawItemStack(getDefaultItem(), getX(), getY(), true, "");
         }
     }

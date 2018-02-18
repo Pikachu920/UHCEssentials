@@ -1,0 +1,25 @@
+{
+  "parent": "uhcessentials:builtin/uhcessentials",
+  "textures": {
+    "layer0": "items/compass"
+  },
+  "display": {
+    "gui": {
+      "rotation": [
+        0,
+        45,
+        30
+      ],
+      "translation": [
+        0.00,
+        0.00,
+        0.00
+      ],
+      "scale": [
+        1.50,
+        1.50,
+        1.50
+      ]
+    }
+  }
+}

@@ -34,7 +34,7 @@ public class Fullbright {
 
             @Override
             public KeyBinding getKeyBinding() {
-                return new KeyBinding("Toggle Fullbright", Keyboard.KEY_L, "UHC Essentials");
+                return new KeyBinding("key.uhcessentials.fullbright", Keyboard.KEY_L, "key.uhcessentials.category");
             }
         });
     }

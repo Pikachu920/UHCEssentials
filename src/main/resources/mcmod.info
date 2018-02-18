@@ -1,11 +1,11 @@
 [
 {
-  "modid": "uhc essentials",
+  "modid": "uhcessentials",
   "name": "UHC Essentials",
   "description": "A remake of the original UHC essentials mod for Forge.",
-  "version": "${version}",
+  "version": "1.0",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://github.com/Pikachu920/UHCEssentials",
   "updateUrl": "",
   "authorList": ["sky_high"],
   "credits": "",

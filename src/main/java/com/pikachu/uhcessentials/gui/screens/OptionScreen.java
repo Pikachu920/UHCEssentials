@@ -31,7 +31,7 @@ public class OptionScreen extends GuiScreen {
 
             @Override
             public KeyBinding getKeyBinding() {
-                return new KeyBinding("Open options screen", Keyboard.KEY_M, "UHC Essentials");
+                return new KeyBinding("key.uhcessentials.optionsmenu", Keyboard.KEY_M, "key.uhcessentials.category");
             }
         });
     }
@@ -56,7 +56,9 @@ public class OptionScreen extends GuiScreen {
                     "Controls whether or not the " + window.getName() + " window is enabled").set(window.isEnabled());
             window.setClicked(false);
         }
-        Main.getConfig().save();
+        if (Main.getConfig().hasChanged()) {
+            Main.getConfig().save();
+        }
     }
 
     @Override
