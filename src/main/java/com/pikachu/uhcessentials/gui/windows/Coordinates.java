@@ -1,4 +1,4 @@
-package com.pikachu.uhcessentials.gui.elements;
+package com.pikachu.uhcessentials.gui.windows;
 
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import com.pikachu.uhcessentials.utils.Util;

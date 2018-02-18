@@ -1,6 +1,6 @@
 package com.pikachu.uhcessentials.gui.base;
 
-import com.pikachu.uhcessentials.gui.OptionScreen;
+import com.pikachu.uhcessentials.gui.screens.OptionScreen;
 import com.pikachu.uhcessentials.utils.Getter;
 import com.pikachu.uhcessentials.utils.Util;
 import net.minecraft.client.Minecraft;

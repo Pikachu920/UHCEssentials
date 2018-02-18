@@ -1,4 +1,4 @@
-package com.pikachu.uhcessentials.gui;
+package com.pikachu.uhcessentials.gui.screens;
 
 import com.pikachu.uhcessentials.Main;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
@@ -27,7 +27,6 @@ public class OptionScreen extends GuiScreen {
             @Override
             public void onPress() {
                 Minecraft.getMinecraft().displayGuiScreen(Main.getOptionScreen());
-                System.out.println("debug: " + mc.debug);
             }
 
             @Override

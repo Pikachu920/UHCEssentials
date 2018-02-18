@@ -1,11 +1,11 @@
 package com.pikachu.uhcessentials;
 
 import com.pikachu.uhcessentials.features.Fullbright;
-import com.pikachu.uhcessentials.gui.OptionScreen;
 import com.pikachu.uhcessentials.gui.base.ItemWindow;
 import com.pikachu.uhcessentials.gui.base.TextWindow;
-import com.pikachu.uhcessentials.gui.elements.ArrowCounter;
-import com.pikachu.uhcessentials.gui.elements.Coordinates;
+import com.pikachu.uhcessentials.gui.screens.OptionScreen;
+import com.pikachu.uhcessentials.gui.windows.ArrowCounter;
+import com.pikachu.uhcessentials.gui.windows.Coordinates;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import com.pikachu.uhcessentials.utils.Getter;
 import com.pikachu.uhcessentials.utils.Util;
