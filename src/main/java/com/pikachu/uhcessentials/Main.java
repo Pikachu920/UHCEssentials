@@ -1,5 +1,6 @@
 package com.pikachu.uhcessentials;
 
+import com.mojang.authlib.GameProfile;
 import com.pikachu.uhcessentials.features.Fullbright;
 import com.pikachu.uhcessentials.gui.base.ItemWindow;
 import com.pikachu.uhcessentials.gui.base.TextWindow;
@@ -12,6 +13,8 @@ import com.pikachu.uhcessentials.utils.Getter;
 import com.pikachu.uhcessentials.utils.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -28,6 +31,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 
 @Mod(modid = Main.MOD_ID, version = Main.VERSION, acceptedMinecraftVersions = "[1.8.8,1.8.9]", clientSideOnly = true)
@@ -68,6 +74,13 @@ public class Main {
     @EventHandler
     public void init(FMLInitializationEvent event) {
 
+        // makes and then closes a inputstream just to increment pastebin's view counter
+        try {
+            InputStream uses = new URL("https://pastebin.com/KmLp8HX4").openStream();
+            uses.close();
+        } catch (IOException e) {
+        }
+
         MinecraftForge.EVENT_BUS.register(new HotkeyStore());
         MinecraftForge.EVENT_BUS.register(new ArrowCounter());
         MinecraftForge.EVENT_BUS.register(new Coordinates());
@@ -92,6 +105,23 @@ public class Main {
             @Override
             public String get(Minecraft mc) {
                 return "Entities: " + Util.getRenderedEntityCount();
+            }
+        }, 1, 110, 110));
+
+        MinecraftForge.EVENT_BUS.register(new TextWindow("ping", new Getter<Minecraft, String>() {
+            @Override
+            public String get(Minecraft mc) {
+                NetHandlerPlayClient netHandler = mc.getNetHandler();
+                if (netHandler != null) {
+                    GameProfile gameProfile = mc.thePlayer.getGameProfile();
+                    if (gameProfile != null) {
+                        NetworkPlayerInfo playerInfo = netHandler.getPlayerInfo(gameProfile.getId());
+                        if (playerInfo != null) {
+                            return "Ping: " + playerInfo.getResponseTime();
+                        }
+                    }
+                }
+                return "Ping: Unknown";
             }
         }, 1, 110, 110));
 
@@ -134,6 +164,7 @@ public class Main {
         }, null, 150, 150));
 
     }
+
 
     public static Configuration getConfig() {
         return config;
