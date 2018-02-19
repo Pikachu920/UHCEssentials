@@ -4,3 +4,5 @@ key.uhcessentials.optionsmenu=Open options sceen
 key.uhcessentials.coordinatesmenu=Open coordinates menu
 
 uhcessentials.invalidcoordinates=Invalid coordinates!
+uhcessentials.coordinatesmenutitle=Compass Coordinates
+uhcessentials.savecoordinateslabel=Save Coordinates

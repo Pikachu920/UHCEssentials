@@ -48,12 +48,7 @@ public class OptionScreen extends GuiScreen {
             if (hovering(window, mouseX, mouseY) && lastButton == 1) {
                 window.toggle();
             }
-            Main.getConfig().get(window.getName(), "x", window.getDefaultX(),
-                    "Controls the x coordinate of the " + window.getName() + " window").set(window.getX());
-            Main.getConfig().get(window.getName(), "y", window.getDefaultY(),
-                    "Controls the y coordinate of the " + window.getName() + " window").set(window.getY());
-            Main.getConfig().get(window.getName(), "enabled", true,
-                    "Controls whether or not the " + window.getName() + " window is enabled").set(window.isEnabled());
+            window.save(false);
             window.setClicked(false);
         }
         if (Main.getConfig().hasChanged()) {

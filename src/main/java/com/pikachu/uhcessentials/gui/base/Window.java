@@ -45,7 +45,6 @@ public abstract class Window extends Gui {
     private boolean clicked;
     protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 
-
     public int getX() {
         return x;
     }
@@ -73,6 +72,18 @@ public abstract class Window extends Gui {
     public void reset() {
         setX(defaultX);
         setY(defaultY);
+    }
+
+    public void save(boolean alsoSaveConfig) {
+        Main.getConfig().get(getName(), "x", getDefaultX(),
+                "Controls the x coordinate of the " + getName() + " window").set(getX());
+        Main.getConfig().get(getName(), "y", getDefaultY(),
+                "Controls the y coordinate of the " + getName() + " window").set(getY());
+        Main.getConfig().get(getName(), "enabled", true,
+                "Controls whether or not the " + getName() + " window is enabled").set(isEnabled());
+        if (alsoSaveConfig) {
+            Main.getConfig().save();
+        }
     }
 
     public int getDefaultY() {

@@ -33,12 +33,13 @@ public class Coordinates extends MovableWindow {
         String y = String.valueOf(Util.trimmed(Math.floor(player.posY)));
         String z = String.valueOf(Util.trimmed(Math.floor(player.posZ)));
         longestString = Util.findLongestString(x, y, z);
-        double rotation = MathHelper.wrapAngleTo180_float(this.mc.thePlayer.rotationYaw);
-        int var25 = MathHelper.floor_double((this.mc.thePlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        double rotation = MathHelper.wrapAngleTo180_float(player.rotationYaw);
 
         String direction = "";
         String headingZ = "";
         String headingX = "";
+
+        // rotation calculations credit Sintinium (https://github.com/Sintinium/)
         if (rotation > -22.5 && rotation <= 22.5) {
             direction = "S";
             headingZ = "+";
@@ -68,6 +69,7 @@ public class Coordinates extends MovableWindow {
             headingZ = "+";
             headingX = "+";
         }
+        // end rotation calculations
 
         Gui.drawRect(getX() - LEFT_PADDING, getY(), getX() + getWidth() + RIGHT_PADDING, getY() + getHeight(), getColor());
 

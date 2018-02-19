@@ -22,6 +22,7 @@ public final class Util {
     }
 
     public static final int WHITE = new Color(255, 255, 255).getRGB();
+    public static final int RED = new Color(255, 85, 85).getRGB();
 
     private static String workingDir = new File("").getAbsolutePath();
     private static final DecimalFormat TRIM_FORMAT = new DecimalFormat("0");
@@ -91,6 +92,15 @@ public final class Util {
 
     public static String getRenderedEntityCount() {
         return mc.renderGlobal.getDebugInfoEntities().split("/")[0].split(" ")[1];
+    }
+
+    public static boolean endsWithAny(String check, String... potentialEnds) {
+        for (String potentialEnd : potentialEnds) {
+            if (check.endsWith(potentialEnd)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
