@@ -41,20 +41,15 @@ public class Main {
 
     public static final String MOD_ID = "uhcessentials";
     public static final String VERSION = "0.5";
-
-    private static Configuration config = new Configuration(new File(Util.getWorkingDir(true) + "UHCEssentials.cfg"));
-
     public static final Item CUSTOM_COMPASS = new Item().setUnlocalizedName("customcompass");
-
     private static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    private static final OptionScreen OPTION_SCREEN = new OptionScreen();
+    private static final Fullbright FULLBRIGHT = new Fullbright();
+    private static Configuration config = new Configuration(new File(Util.getWorkingDir(true) + "UHCEssentials.cfg"));
 
     public static Logger getLogger() {
         return LOGGER;
     }
-
-    private static final OptionScreen OPTION_SCREEN = new OptionScreen();
-
-    private static final Fullbright FULLBRIGHT = new Fullbright();
 
     public static OptionScreen getOptionScreen() {
         return OPTION_SCREEN;
@@ -62,6 +57,10 @@ public class Main {
 
     public static Fullbright getFullbright() {
         return FULLBRIGHT;
+    }
+
+    public static Configuration getConfig() {
+        return config;
     }
 
     @EventHandler
@@ -163,11 +162,6 @@ public class Main {
             }
         }, null, 150, 150));
 
-    }
-
-
-    public static Configuration getConfig() {
-        return config;
     }
 }
 

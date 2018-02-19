@@ -18,16 +18,14 @@ import java.util.stream.IntStream;
 
 public final class Util {
 
-    private Util() {
-    }
-
     public static final int WHITE = new Color(255, 255, 255).getRGB();
     public static final int RED = new Color(255, 85, 85).getRGB();
-
-    private static String workingDir = new File("").getAbsolutePath();
     private static final DecimalFormat TRIM_FORMAT = new DecimalFormat("0");
+    private static String workingDir = new File("").getAbsolutePath();
+    private static Minecraft mc = Minecraft.getMinecraft();
 
-    private static Minecraft mc =  Minecraft.getMinecraft();
+    private Util() {
+    }
 
     public static String getFPS() {
         return mc.debug.split(" fps")[0];

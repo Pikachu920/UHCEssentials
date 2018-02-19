@@ -12,16 +12,17 @@ import java.awt.Color;
 
 public abstract class Window extends Gui {
 
+    private final int DISABLED_COLOR = new Color(255, 0, 25).getRGB();
+    protected Minecraft mc = Minecraft.getMinecraft();
+    protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
     private String name;
     private int defaultX;
     private int defaultY;
     private int x;
-
-    private final int DISABLED_COLOR = new Color(255, 0, 25).getRGB();
     private Color color = new Color(69, 69, 69, 150);
     private int y;
     private boolean enabled;
-
+    private boolean clicked;
     public Window(String name, int defaultX, int defaultY) {
         this.name = name;
         this.defaultX = defaultX;
@@ -41,20 +42,8 @@ public abstract class Window extends Gui {
         }
     }
 
-    protected Minecraft mc = Minecraft.getMinecraft();
-    private boolean clicked;
-    protected FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
-
     public int getX() {
         return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getColor() {
-        return color.getRGB();
     }
 
     public void setX(int x) {
@@ -63,10 +52,18 @@ public abstract class Window extends Gui {
         }
     }
 
+    public int getY() {
+        return y;
+    }
+
     public void setY(int y) {
         if (y < mc.displayHeight) {
             this.y = y;
         }
+    }
+
+    public int getColor() {
+        return color.getRGB();
     }
 
     public void reset() {

@@ -8,8 +8,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class ArrowCounter extends MovableWindow {
 
-    private ItemStack arrow = new ItemStack(Items.arrow, 1);
     private final int LOW_INDICATOR = Util.RED;
+    private ItemStack arrow = new ItemStack(Items.arrow, 1);
     private String amount;
 
     public ArrowCounter() {

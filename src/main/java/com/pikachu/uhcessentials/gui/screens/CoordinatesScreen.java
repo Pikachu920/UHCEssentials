@@ -70,12 +70,10 @@ public class CoordinatesScreen extends GuiScreen {
         }
     }
 
-
     @Override
     public void initGui() {
         super.initGui();
-        okButton = new GuiButton(0, (width / 2) - 75, (height / 4) * 3, 150, 20, okButtonLabel);
-        buttonList.add(okButton);
+        buttonList.add(okButton = new GuiButton(0, (width / 2) - 75, (height / 4) * 3, 150, 20, okButtonLabel));
         okButton.visible = true;
         okButton.enabled = false;
         xInput = new GuiTextField(0, fontRendererObj, (width / 2) - 50, (height / 2) - (height / 8), 100, 20);

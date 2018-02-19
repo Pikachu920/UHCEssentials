@@ -4,7 +4,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HotkeyStore {
