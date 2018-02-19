@@ -88,8 +88,6 @@ public class OptionScreen extends GuiScreen {
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        System.out.println("x: " + mouseX);
-        System.out.println("y: " + mouseY);
         lastX = mouseX;
         lastY = mouseY;
         lastButton = mouseButton;
