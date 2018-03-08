@@ -1,9 +1,8 @@
 package com.pikachu.uhcessentials.gui.windows;
 
-import com.pikachu.uhcessentials.Main;
+import com.pikachu.uhcessentials.UHCEssentials;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import com.pikachu.uhcessentials.gui.screens.CoordinatesScreen;
-import com.pikachu.uhcessentials.utils.Callback;
 import com.pikachu.uhcessentials.utils.CustomCompass;
 import com.pikachu.uhcessentials.utils.Util;
 import net.minecraft.item.ItemStack;
@@ -16,16 +15,11 @@ public class Compass extends MovableWindow {
 
     private static BlockPos target = new BlockPos(0, 0, 0);
 
-    private final ItemStack COMPASS_STACK = new ItemStack(Main.CUSTOM_COMPASS);
+    private final ItemStack COMPASS_STACK = new ItemStack(UHCEssentials.CUSTOM_COMPASS);
 
     public Compass() {
         super("compass", 150, 150);
-        new CoordinatesScreen(new Callback<BlockPos>() {
-            @Override
-            public void run(BlockPos newPosition) {
-                target = newPosition;
-            }
-        });
+        new CoordinatesScreen(newPos -> target = newPos);
     }
 
     public static BlockPos getTarget() {
@@ -49,7 +43,7 @@ public class Compass extends MovableWindow {
 
     @SubscribeEvent
     public void onTextureSwitch(TextureStitchEvent.Pre event) {
-        event.map.setTextureEntry(Main.MOD_ID + ":builtin/uhccompass", new CustomCompass());
+        event.map.setTextureEntry(UHCEssentials.MOD_ID + ":builtin/uhccompass", new CustomCompass());
     }
 
 }

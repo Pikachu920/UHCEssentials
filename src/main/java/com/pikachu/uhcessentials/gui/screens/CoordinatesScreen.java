@@ -2,7 +2,6 @@ package com.pikachu.uhcessentials.gui.screens;
 
 import com.pikachu.uhcessentials.hotkeys.Hotkey;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
-import com.pikachu.uhcessentials.utils.Callback;
 import com.pikachu.uhcessentials.utils.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -14,12 +13,13 @@ import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 public class CoordinatesScreen extends GuiScreen {
 
     private GuiTextField xInput;
     private GuiTextField zInput;
-    private Callback<BlockPos> callback;
+    private Consumer<BlockPos> callback;
     private CoordinatesScreen instance = this;
     private String title = I18n.format("uhcessentials.coordinatesmenutitle");
     private String error = I18n.format("uhcessentials.invalidcoordinates");
@@ -28,7 +28,7 @@ public class CoordinatesScreen extends GuiScreen {
     private double zValue;
     private GuiButton okButton;
 
-    public CoordinatesScreen(Callback<BlockPos> callback) {
+    public CoordinatesScreen(Consumer<BlockPos> callback) {
         this.callback = callback;
         HotkeyStore.add(new Hotkey(this) {
             @Override
@@ -121,8 +121,8 @@ public class CoordinatesScreen extends GuiScreen {
         if (mc.currentScreen == null) {
             mc.setIngameFocus();
         }
-        if (blockPos != null) {
-            callback.run(blockPos);
+        if (blockPos != null && callback != null) {
+            callback.accept(blockPos);
         }
     }
 

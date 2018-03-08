@@ -1,6 +1,6 @@
 package com.pikachu.uhcessentials.gui.screens;
 
-import com.pikachu.uhcessentials.Main;
+import com.pikachu.uhcessentials.UHCEssentials;
 import com.pikachu.uhcessentials.gui.base.MovableWindow;
 import com.pikachu.uhcessentials.gui.base.Window;
 import com.pikachu.uhcessentials.hotkeys.Hotkey;
@@ -26,7 +26,7 @@ public class OptionScreen extends GuiScreen {
         HotkeyStore.add(new Hotkey(this) {
             @Override
             public void onPress() {
-                Minecraft.getMinecraft().displayGuiScreen(Main.getOptionScreen());
+                Minecraft.getMinecraft().displayGuiScreen(UHCEssentials.getOptionScreen());
             }
 
             @Override
@@ -51,8 +51,8 @@ public class OptionScreen extends GuiScreen {
             window.save(false);
             window.setClicked(false);
         }
-        if (Main.getConfig().hasChanged()) {
-            Main.getConfig().save();
+        if (UHCEssentials.getConfig().hasChanged()) {
+            UHCEssentials.getConfig().save();
         }
     }
 

@@ -1,6 +1,6 @@
 package com.pikachu.uhcessentials.features;
 
-import com.pikachu.uhcessentials.Main;
+import com.pikachu.uhcessentials.UHCEssentials;
 import com.pikachu.uhcessentials.hotkeys.Hotkey;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraft.client.Minecraft;
@@ -13,7 +13,7 @@ import org.lwjgl.input.Keyboard;
 public class Fullbright {
 
     private final float FULLBRIGHT_LEVEL = 2000;
-    private boolean enabled = Main.getConfig().getBoolean("enabled", "Fullbright", false,
+    private boolean enabled = UHCEssentials.getConfig().getBoolean("enabled", "Fullbright", false,
             "Controls whether or not fullbright is enabled");
     private Minecraft mc = Minecraft.getMinecraft();
     private float originalGamma = mc.gameSettings.gammaSetting;
@@ -27,9 +27,9 @@ public class Fullbright {
             @Override
             public void onPress() {
                 toggle();
-                Main.getConfig().get("Fullbright", "enabled", false,
+                UHCEssentials.getConfig().get("Fullbright", "enabled", false,
                         "Controls whether or not fullbright is enabled").set(enabled);
-                Main.getConfig().save();
+                UHCEssentials.getConfig().save();
             }
 
             @Override
