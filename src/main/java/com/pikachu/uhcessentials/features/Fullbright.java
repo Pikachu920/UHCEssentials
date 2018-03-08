@@ -56,9 +56,6 @@ public class Fullbright {
     }
 
     public void init() {
-        // chances are this is the same Minecraft as we've already saved, but why not
-        Minecraft mc = Minecraft.getMinecraft();
-        System.out.println("setting entity renderer");
         mc.entityRenderer = new FullbrightEntityRender(mc, mc.getResourceManager());
     }
 
