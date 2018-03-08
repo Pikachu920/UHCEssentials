@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class OptionScreen extends GuiScreen {
 
-    public static ArrayList<Window> windows = new ArrayList<Window>();
+    public static ArrayList<Window> windows = new ArrayList<>();
 
     private int lastX;
     private int lastY;

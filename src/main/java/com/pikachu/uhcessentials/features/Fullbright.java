@@ -56,13 +56,13 @@ public class Fullbright {
     }
 
     public void init() {
-        mc.entityRenderer = new FullbrightEntityRender(mc, mc.getResourceManager());
+        mc.entityRenderer = new FullbrightEntityRender(mc.entityRenderer.mc, mc.entityRenderer.resourceManager);
     }
 
     /*
     * This method removes the brightness fog gets when you have night vision by
-    * removing night vision, recalculating and then saving the new colors
-    * and applying them to the event that had the night vision brightness
+    * removing night vision, recalculating the fog colors and then saving the new
+    * colors to apply to the event that had the night vision brightness
     * if full bright was applied
     */
     @SubscribeEvent
@@ -106,7 +106,6 @@ public class Fullbright {
                 super.updateCameraAndRender(p_181560_1_, p_181560_2_);
             }
         }
-
     }
 
 }
