@@ -4,23 +4,27 @@ import com.pikachu.uhcessentials.UHCEssentials;
 import com.pikachu.uhcessentials.hotkeys.Hotkey;
 import com.pikachu.uhcessentials.hotkeys.HotkeyStore;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.lwjgl.input.Keyboard;
 
 public class Fullbright {
 
-    private final float FULLBRIGHT_LEVEL = 2000;
+    private boolean cleanColors;
+    private boolean fullbrightApplied;
+    private float[] cleanedColors = new float[3];
+
     private boolean enabled = UHCEssentials.getConfig().getBoolean("enabled", "Fullbright", false,
             "Controls whether or not fullbright is enabled");
     private Minecraft mc = Minecraft.getMinecraft();
-    private float originalGamma = mc.gameSettings.gammaSetting;
 
     public Fullbright() {
-        // to prevent from saving fullbright as the brightness setting
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> mc.gameSettings.gammaSetting = originalGamma));
         MinecraftForge.EVENT_BUS.register(this);
         setEnabled(enabled);
         HotkeyStore.add(new Hotkey(this) {
@@ -44,12 +48,6 @@ public class Fullbright {
     }
 
     public void setEnabled(boolean enabled) {
-        if (enabled) {
-            originalGamma = mc.gameSettings.gammaSetting;
-            mc.gameSettings.gammaSetting = FULLBRIGHT_LEVEL;
-        } else {
-            mc.gameSettings.gammaSetting = originalGamma;
-        }
         this.enabled = enabled;
     }
 
@@ -57,12 +55,61 @@ public class Fullbright {
         setEnabled(!isEnabled());
     }
 
-    // without this fullbright won't properly persist restarts
+    public void init() {
+        // chances are this is the same Minecraft as we've already saved, but why not
+        Minecraft mc = Minecraft.getMinecraft();
+        System.out.println("setting entity renderer");
+        mc.entityRenderer = new FullbrightEntityRender(mc, mc.getResourceManager());
+    }
+
+    /*
+    * This method removes the brightness fog gets when you have night vision by
+    * removing night vision, recalculating and then saving the new colors
+    * and applying them to the event that had the night vision brightness
+    * if full bright was applied
+    */
     @SubscribeEvent
-    public void onJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
-        if (enabled) {
-            mc.gameSettings.gammaSetting = FULLBRIGHT_LEVEL;
+    public void onFogRender(EntityViewRenderEvent.FogColors e) {
+        if (fullbrightApplied) {
+            if (cleanColors) {
+                cleanColors = false;
+                cleanedColors[0] = e.red;
+                cleanedColors[1] = e.blue;
+                cleanedColors[2] = e.green;
+            } else {
+                cleanColors = true;
+                mc.thePlayer.removePotionEffect(Potion.nightVision.id);
+                e.renderer.updateFogColor((float) e.renderPartialTicks);
+                e.red = cleanedColors[0];
+                e.blue = cleanedColors[1];
+                e.green = cleanedColors[2];
+            }
         }
+    }
+
+    /*
+     * Unfortunately, this is the best way to do fullbright without messing w/ game settings
+     * or asm (that i've found)
+     */
+    public class FullbrightEntityRender extends EntityRenderer {
+
+        public FullbrightEntityRender(Minecraft mcIn, IResourceManager resourceManagerIn) {
+            super(mcIn, resourceManagerIn);
+        }
+
+        @Override
+        public void updateCameraAndRender(float p_181560_1_, long p_181560_2_) {
+            if (enabled && mc.thePlayer != null && !mc.thePlayer.isPotionActive(Potion.nightVision)) {
+                fullbrightApplied = true;
+                mc.thePlayer.addPotionEffect(new PotionEffect(Potion.nightVision.id, Integer.MAX_VALUE, 999, false, false));
+                super.updateCameraAndRender(p_181560_1_, p_181560_2_);
+                mc.thePlayer.removePotionEffect(Potion.nightVision.id);
+            } else {
+                fullbrightApplied = false;
+                super.updateCameraAndRender(p_181560_1_, p_181560_2_);
+            }
+        }
+
     }
 
 }

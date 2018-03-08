@@ -29,9 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 
 @Mod(modid = UHCEssentials.MOD_ID, version = UHCEssentials.VERSION, acceptedMinecraftVersions = "[1.8.8,1.8.9]", clientSideOnly = true)
@@ -73,13 +70,7 @@ public class UHCEssentials {
     @EventHandler
     public void init(FMLInitializationEvent event) {
 
-        // makes and then closes a inputstream just to increment pastebin's view counter
-        try {
-            InputStream uses = new URL("https://pastebin.com/KmLp8HX4").openStream();
-            uses.close();
-        } catch (IOException e) {
-        }
-
+        FULLBRIGHT.init();
         MinecraftForge.EVENT_BUS.register(new HotkeyStore());
         MinecraftForge.EVENT_BUS.register(new ArrowCounter());
         MinecraftForge.EVENT_BUS.register(new Coordinates());
